@@ -1,4 +1,19 @@
 Decimal numbers
     1. fixed-point
     2. floating-point
-    
+    both are part of the sql standard
+
+
+
+fixed-point numbers
+    - also called arbitrary precision type, is nummeric(precision, scale)
+    - precision: maximum number of digit
+    - scale: number of digit on the right of the decimal
+    ex: numeric(5, 2) => 1.47, 1.00, 121.50
+    - if do not specify the scale value, it will be set to zero; in effect, it creates an integer
+    - if you do not specify the 
+
+
+Float-point numbers
+
+

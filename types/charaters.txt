@@ -1,0 +1,26 @@
+Data type
+
+Character string type are genreral-perpose types.
+
+1. char(n)/ character(n)
+    - A fixed-length column where the character length is specified by n
+    - ex: char(20) -  stores 20 characteres per row. If you insert fewer than 20 characteres, 
+        postgres pads the rest of the column with spaces.
+    - type char is part of the sql standard
+
+
+2. varchar(n) / character varying
+    - variable-length column where the maximum length is specified by n. if you insert fewer 
+      characters than the maximum, postgres will not store extra space.
+    - in large database, it save considerable space
+    - include in the sql standar
+
+
+3. text 
+    - variable-length column of unlimited space
+    - the max character string you can store in postgres is 1 gigabyte
+    - the type text is not part of the sql standard
+
+
+There is no substantial difference in performance between the three types. 
+the varchar and text type can help save space.

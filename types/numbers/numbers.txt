@@ -1,0 +1,47 @@
+the sql number type include:
+    1. integers: whole numbers positive and negative
+    2. fixed point and floating point: two formats of fraction of whole numbers
+
+
+The sql standard provides 3 integers types:
+    1. smallint: storage 2 bytes (-32768 to +32767).
+    2. integer : storage 4 bytes  (-2_147_483_648 to +2_147_483_647)
+    3. bigint: storage 8 bytes
+
+- the bigint type will cover any requirements, but it eats up a lot of storage
+- when you know value will remain contrained, smallint make sense. ex: day of the moth or years are good example
+- if you try to insert a number into any of these colum that is ouside it range, the database will
+  stop the operation and return an "out of range" error
+
+
+Auto incrementing integers:
+with postgres, two ways to auto-increment integers:
+    1. serial data type - postgres specific implementation of the ANSI SQL standard for auto-numbered identity column
+    2. The ANSI SQL standard for IDENTITY keyword
+
+auto-increment with Serial data type
+    1. smallserial: storage 2 bytes, range(1, to 32767)
+    2. serial: storage 4 bytes, range 1 to 2_147_483_647
+    3. bigserial: stange 8 bytes, range(1, to big numbers ahh) 
+
+    ex: CREATE TABLE people(
+        id serial, 
+        person_name varchar(100)
+    )
+
+
+auto-increment with IDENTITY
+you can specified IDENTITY in 2 ways
+    1. GENEREATED ALWAYS AS IDENTITY tells the db to always fill the column with an auto-increment value.
+       a user cannot a value into the column id withoud manually overriding that setting
+    
+    2. GENERATE BY DEFAULT AS IDENTITY tells the db to fill the column with an auto-incremented value
+       by default if the user does not supply one, this option allows posibilty of dupllicate values.
+
+    use GENEREATED ALWAYS AS IDENTITY in most cases
+ 
+    ex: CREATE TABLE people(
+        id integer GENERATED ALWAYS AS IDENTITY,
+        person_name varchar(100)
+
+    )

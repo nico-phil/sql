@@ -1,0 +1,6 @@
+Date and time data type
+
+1. timestamp: storage 8 bytes, date and time, range 
+2. date: storage zise 4 bytes, date(no time)
+3. time 8 bytes, Time(no date): 00:00:00 to 24:00:00
+4. interval 16 bytes, Time interval +/- 178_000_000 years

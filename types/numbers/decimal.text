@@ -14,6 +14,11 @@ fixed-point numbers
     - if you do not specify the 
 
 
-Float-point numbers
-
-
+Floating-point numbers
+    1. real: real type allosw precision to 6 decimal digits
+    2. double precision: allows 15 decimal digits precision
+    - the different between the 2 is how much data they store.
+    - both are part the sql standard
+    - also called variable precision
+    - the db stores the numbers in parts representing the digits and an exponent-the location where the decimal point belongs
+    - if your are dealing with decimal that need to be exact for example money use NUMERIC type

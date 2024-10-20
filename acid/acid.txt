@@ -1,0 +1,76 @@
+ACID
+
+ACID stands for Atomicity, Consistency, Isolation, and Durability, which are 
+the key properties that guarantee reliable transaction processing in databases:
+
+    Atomicity:  Every transaction is treated as a single unit. It either completes 
+                entirely or not at all. If any part of the transaction fails, the entire 
+                transaction fails, and the database remains unchanged.
+
+    
+    Consistency:    A transaction brings the database from one valid state to another. 
+                    After the transaction, all the rules, constraints, and data integrity 
+                    remain intact
+
+    
+    Isolation:  Transactions occur independently of one another. Intermediate states of a 
+                transaction are not visible to other transactions, preventing "dirty reads" or 
+                partial data access.
+
+
+    Durability: Once a transaction is committed, it is permanent, even if the system crashes. 
+                This is usually handled by storing the transaction data on a persistent storage
+                 medium (e.g., disk)
+
+
+2. Transactions
+    A transaction is a sequence of database operations that are executed as a single logical 
+    unit. All operations within a transaction must be successful for the transaction to commit 
+    and make changes permanent. If any operation fails, the transaction rolls back, undoing 
+    any changes.
+
+        BEGIN TRANSACTION;
+            UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
+            UPDATE accounts SET balance = balance + 100 WHERE account_id = 2;
+        COMMIT;
+
+
+
+Isolsation - Read phenomena
+    dirty reads :   for example, you have 2 concurrent transactions and the second transaction 
+                    modifies the db but not commit yet, and if and the changes are visible in 
+                    the first transaction.it's a dirty read
+
+    non-repeatable reads:   for example, you have 2 concurrent transactions and the second 
+                            transaction modifies the db and commits, and if and the changes are visible in 
+                            the first transaction, it a form a inconsistency
+    
+    Phantom read:   for example, you have 2 concurrent transactions and the second 
+                    transaction modifies the db and commits(add new row), and if and the changes are visible in 
+                    the first transaction, its inconsistent, phantom read
+    
+    
+    lost updates:  for example, you have 2 concurrent transactions. the first transaction modify
+                    the db, the second mofify the db also and commits before the first. the 
+                    result only have the modidfication of the second second transation. 
+                    we lost the the modification of the first stransaction
+
+
+Isolsation level to resolve read phenomena
+
+    read committed :    Each query in a transaction only sees committed changes by others 
+                        transactions
+    
+    repeatable read: the transaction will make sure that when a query read a row, that row will
+                        remain unchanged while its running
+
+    Snapshot: Each query in a transaction only sees changes that have been committed up to the
+                to the start of the transaction. it's like a snapshot version of the database 
+                at that moment
+
+    Serializable: Transactions are run as if they serialized one after the other
+
+
+
+
+        

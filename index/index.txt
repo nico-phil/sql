@@ -1,0 +1,67 @@
+
+Indexes 
+
+    are data structures used to improve the speed of data retrieval operations on a database table. 
+    Instead of searching through every row, the database can quickly locate the data using an index, 
+    similar to an index at the back of a book.
+
+    Primary Index: Usually created on a primary key column, ensuring unique values.
+
+    Secondary Index: Created on non-primary key columns to optimize queries.
+
+    Indexes speed up read operations but can slow down write operations, as the index needs to be 
+    updated whenever the data changes. 
+
+
+type of index
+
+    1.  B-Tree Index
+    2.  Hash Index
+    3.  GIN (Generalized Inverted Index)
+    4.  GiST (Generalized Search Tree)
+    5.  BRIN (Block Range INdex)
+    6.  SP-GiST (Space-Partitioned Generalized Search Tree)
+    7.  Full-Text Search Indexes
+    8.  Bloom Filter Index
+
+
+B-Tree Index
+
+    Description:    B-Tree indexes are the default and most commonly used index type in PostgreSQL. 
+                    They work well for exact matches and range-based queries.
+
+    Structure:  A balanced tree where each node stores sorted key values along with pointers to data 
+                or other nodes. B-Trees keep all leaf nodes at the same depth, maintaining balance.
+
+    Best For:   Equality, inequality, range, and pattern matching (e.g., =, >, <, BETWEEN).
+
+    Use Cases:  Primary keys, foreign keys, and columns frequently queried with ranges.
+
+
+
+2. Hash Index
+
+    Description:    Hash indexes are optimized for equality comparisons (=) and map values to fixed 
+                    hash codes to quickly locate the data.
+
+    Structure: A hash table where each entry points to a particular data location in the table.
+    
+    Best For: Exact matches only.
+    
+    Use Cases: Equality-only searches on high-cardinality columns, such as looking up records by unique identifiers.
+
+
+
+3. GIN (Generalized Inverted Index)
+
+    Description:    GIN indexes support queries for values that appear multiple times within data 
+                    structures, making them ideal for arrays, JSONB (JSON binary), and full-text search.
+
+    Structure:  An inverted index structure that maps individual data elements to the rows where they appear.
+    
+    Best For: I ndexing elements within data types like arrays, JSON, JSONB, and full-text search.
+    
+    Use Cases: Queries for text-based data and full-text search applications, where you want to find rows containing specific words or phrases.
+
+
+

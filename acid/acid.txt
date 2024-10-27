@@ -38,7 +38,7 @@ the key properties that guarantee reliable transaction processing in databases:
 
 Isolsation - Read phenomena
     dirty reads :   for example, you have 2 concurrent transactions and the second transaction 
-                    modifies the db but not commit yet, and if and the changes are visible in 
+                    modifies the db but not commit yet, and if the changes are visible in 
                     the first transaction.it's a dirty read
 
     non-repeatable reads:   for example, you have 2 concurrent transactions and the second 

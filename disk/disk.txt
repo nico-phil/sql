@@ -1,1 +1,68 @@
 Understanding Database internals(how tables and indexes are stored)
+
+Concepts:
+    - Table
+    - row_id
+    - Page
+    - Io
+    - Heap data structure
+    - Index data structure b-tree
+    - Example of query
+
+
+row_id : internal and system maintained
+        In certain database(msql - innoDB) it is the same as the primary key but other database
+        like Postgres have system column row_id(tuple_id)
+        
+        row_id | emp_id | emp_name | emp_salary
+        1      | 2000   | jhon     | 100000
+        2      | 3000   | Sarah    | 200000
+        3      | 4000   | Paul     | 300000
+
+
+
+Page :
+    - Depending on the storage model, the rows are stored ad read in logical pages.
+    - The database doesn't read a single row, it reads a page or more in single IO and we get lot of rows in that IO
+    - Each page has a size(8 KB in postgres, 16KB in MYSQl)
+    - Assume each page holds 3 rows in this example, with 1001 rows we will have 1001/ 3 = 333 pages.
+
+
+Io
+    - io operation(input/ouput) is a read request to disk
+    - We try to minimize this as much as possible
+    - An IO can fetch 1 page or more depending on the disk partitions and other factors 
+    - An IO cannot read a single row, its a page with many rows in them, you get them for free.
+    - You want to minimize the number of IOs as they are expensive
+    - Some IOs in operating systems goes to the operating system cache and not disk
+
+
+Heap: 
+    - The Heap is data structure where the table is stored with all its pages one after another. 
+    - This is where the actual data is stored including everything
+    - Traversing the heap is expensive as we need to read so may data to find what we want
+    - That is why we need indexes tell us exactly what part of the heap we need to read. 
+        What page(s) of the heap we need to pull
+
+
+Index
+    - An index is another data structure separate from the heap that has “pointers” to the heap
+    - It has part of the data and used to quickly search for something
+    - You can index on one column or more. 
+    - Once you find a value of the index, you go to the heap to fetch more information where everything is there
+    - Index tells you EXACTLY which page to fetch in the heap instead of taking the hit to scan every page in the heap
+    - The index is also stored as pages and cost IO to pull the entries of the index. 
+    - The smaller the index, the more it can fit in memory the faster the search
+    - Popular data structure for index is b-trees, learn more on that in the b-tree section
+
+
+Notes
+    Sometimes the heap table can be organized around a single index. This is called a clustered 
+    index or an Index Organized Table.
+
+    Primary key is usually a clustered index unless otherwise specified. 
+
+    MySQL InnoDB always have a primary key (clustered index) other indexes point to the primary key “value” 
+
+    Postgres only have secondary indexes and all indexes point directly to the row_id which lives in 
+    the heap.

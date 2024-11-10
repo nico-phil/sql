@@ -7,6 +7,9 @@ the key properties that guarantee reliable transaction processing in databases:
                 entirely or not at all. If any part of the transaction fails, the entire 
                 transaction fails, and the database remains unchanged.
 
+                if the database fails before commiting the transaction, the transaction fails
+                (the roolback will be done by the batabase)
+
     
     Consistency:    A transaction brings the database from one valid state to another. 
                     After the transaction, all the rules, constraints, and data integrity 
@@ -42,7 +45,7 @@ Isolsation - Read phenomena
                     the first transaction.it's a dirty read
 
     non-repeatable reads:   for example, you have 2 concurrent transactions and the second 
-                            transaction modifies the db and commits, and if and the changes are visible in 
+                            transaction modifies the db and commits(changes in column), and if and the changes are visible in 
                             the first transaction, it a form a inconsistency
     
     Phantom read:   for example, you have 2 concurrent transactions and the second 
@@ -58,6 +61,8 @@ Isolsation - Read phenomena
 
 Isolsation level to resolve read phenomena
 
+    read uncommitted : No isolation, any change from the ouside is visible to the transaction, commited or not  
+
     read committed :    Each query in a transaction only sees committed changes by others 
                         transactions
     
@@ -66,11 +71,26 @@ Isolsation level to resolve read phenomena
 
     Snapshot: Each query in a transaction only sees changes that have been committed up to the
                 to the start of the transaction. it's like a snapshot version of the database 
-                at that moment
+                at that moment. postgres use snapshot
 
     Serializable: Transactions are run as if they serialized one after the other
 
 
 
+Database implementation of isolsation
 
+    each DBMS implements isolation level differently
+
+    Pessimistic - row level locks, table locks page locks to avoid lost updates
+    Optimistic - No locks, just tacking if thing changed and fails the trasaction if so
+
+
+Eventual Consistency(in read)
+let say, you have 2 database, the leader one and 2 others. you write in the main database and
+replicate into the others. let say we have 2 concurrenct request: the firstOne write x to the main
+and the second read x from the slave db. the second query may have inconsistency because the replicat
+did not happend yet.
+
+After some time, the replication will be done and we can ge consistent data from the slave db
+it's call eventual consistency
         

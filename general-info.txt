@@ -1,0 +1,6 @@
+// insert a million rows
+docker run --name pg -e POSTGRES_PASSWORD=postgres  postgres 
+
+docker exec -it pg psql -U postgres create table temp (t int); 
+
+insert into temp (t) select random()*100 from generate_series(0,1000000)

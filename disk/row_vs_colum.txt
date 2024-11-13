@@ -64,3 +64,34 @@ Select sum(salary) from emp
 
 
 - Column-Oriented Database (Column store)
+
+in memory
+
+    1:1001, 2:1002, 3:1003, 4:1004, 5:1005, 6:1006, 7:1007, 8:1008 
+    
+    John:1001, Kary:1002, Norman:1003, Nole:1004;         Dar:1005, Yan:1006, Hasan:1007, Ali:1008
+    
+    Smith:1001, White:1002, Freeman:1003, Sol:1004        Thee:1005, Ali:1006, Bilal:1007, Ali:1008
+    
+    111:1001, 222:1002, 333:1003, 444:1004, 555:1005,     666:1006, 777:1007, 888:1008
+    
+    101000:1001, 102000:1002, 103000:1003, 104000:1004, 105000:1005, 106000:1006, 107000:1007, 108000:1008
+    
+    1/1/1991:1001, 2/2/1992:1002, 3/3/1993:1003, 4/4/1994:1004, 5/5/1995:1005, 6/6/1996:1006, 7/7/1997:1007, 8/8/1998:1008
+    
+    eng:1001, mgr:1002, mkt:1003, adm:1004, adm:1005, mkt:1006, acc:1007, acc:1008
+    
+    1/1/2011:1001, 2/1/2012:1002, 3/1/2013:1003, 4/1/2014:1004, 5/1/2015:1005, 6/1/2016:1006, 7/1/2017:1007, 8/1/2018:1008
+
+
+Select first_name from emp where ssn = 666 
+    in this query, the database will go directly to the row ssn, fetch block by block find the ssn=666 (666:1006). since we ask for
+    the the first_name, it will jump to  firstnames row with Yan:1006
+
+
+Select * from emp where id = 1
+    in this query, the database will start by seaching the row, fetch the block. since we ask for everything
+    it will take the fist column of every row
+
+Select sum(salary) from emp
+    in this query, the database will pull only the salary row, make the sum, really easy

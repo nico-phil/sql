@@ -1,0 +1,16 @@
+type of Scan
+    - seq table scan
+    - index scan
+    - bitmap index scan (specific to postgres  )
+
+
+index scan
+    exemple : EXPLAIN ANALYZE SELECT name FROM grades WHERE id= < 100
+    postgrest scan the index, get the page in the heap, and go back again to the next index. and so one and so forth
+
+
+seq table scan : postgres scan the actual pages in the heap 
+
+
+bitmap index scan: postgres scan the index. set all the index pages on bitmap data structure, once it finished
+it fetched all the pages on the table.

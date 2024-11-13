@@ -1,0 +1,11 @@
+Key vs Non-Key Column database indexing
+
+Key
+    here, when we make a request, postgres scan the index, and get the the rows in the heap
+    Create index g_idx on students(g); 
+
+
+Non-Key Column
+    here, postgres does scan only the index(the name is also indclude in the index), mean the name lives in the index
+    data tructure. postges does not neet to fech the name in the table. 
+    Create index g_idx on students(g) INCLUDE name;

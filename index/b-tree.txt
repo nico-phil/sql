@@ -1,0 +1,103 @@
+B-Tree 
+
+- Full Table Scans
+- B-Tree
+- B-Tree limitations
+- B+Tree
+- B+Tree Considerations 
+- B+Tree storage cost in MySQL vs Postgres
+- Summary
+
+- Full Table Scans
+    To find a row in a large table we perform full table scan
+    
+    Reading the entire table is slow (many IO to fetch pages)
+    
+    We need a way to reduce the search space
+
+
+B-Tree
+    Balanced Data structure for fast traversal 
+    
+    B-Tree has Nodes
+
+    In B-Tree of “m” degree each node can have (m) child nodes
+
+    Node has up to (m-1) elements
+
+    Each element has key and value
+
+    Root Node, internal node and leaf nodes
+
+        TID        ID                Name 
+        70          1                 John
+        1           2                 Ali
+        70          3                 Rick
+        2           4                 Sara
+        70          5                 Edmond
+
+
+    TID : tuple id, internal system id
+    
+
+            key:value(id:tuple id)
+
+            2:702 4:704
+            /  \      \
+        1:701  3:703  5:705
+
+
+
+
+Limitation B-Tree
+
+    Elements in all nodes store both key and value 
+
+    Internal nodes take more space thus require more IO and can slow down traversal 
+
+    Range queries are slow because of random access (give me all values 1-5) 
+
+    B+Tree solves both these problems
+
+    Hard to fit internal nodes in memory
+
+
+
+B+Tree
+
+    Exactly like B-Tree but only stores keys in internal nodes
+
+    Values are only stored in leaf nodes
+    
+    Internal nodes are smaller since they only store keys and they can fit more elements
+    
+    Leaf nodes are “linked” so once you find a key you can find all values before and after that key. 
+    
+    Great for range queries
+
+
+    see picture b+tree
+
+
+
+B+Tree & DBMS Considerations
+    Cost of leaf pointer (cheap)
+
+    1 Node fits a DBMS page (most DBMS)
+
+    Can fit internal nodes easily in memory for fast traversal 
+    
+    Leaf nodes can live in data files in the heap
+    
+    Most DBMS systems use B+Tree 
+    
+    MongoDB (WiredTirger) use B-Tree
+
+
+Storage Cost in Postgres vs MySQL 
+
+    B+Trees secondary index values can either point directly to the tuple (Postgres) or to the primary key (MySQL)
+
+    If the Primary key data type is expensive this can cause bloat in all secondary indexes for databases such MySQL (innoDB)
+
+    Leaf nodes in MySQL (InnoDB) contains the full row since its an IOT / clustered index

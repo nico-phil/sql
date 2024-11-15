@@ -21,3 +21,28 @@ explain analyze SELECT id, name FROM employees WHERE name like '%ZN%';
 --  Planning Time: 0.319 ms
 --  Execution Time: 0.444 ms
 
+
+
+-- CREATE INDEC CONCURRENLTY--
+create index concurrently g on grades(g);
+
+
+
+-----------CREATING INDEXES EXAMPLE--------------
+--WE HAVE A TABLE 'test' WITH abc, all integers
+
+CREATE INDEX on test(a);
+CREATE INDEX on test(b);
+
+EXPLAIN ANALYZE SELECT c FROM test WHERE a = 70; --  
+EXPLAIN ANALYZE SELECT c FROM test WHERE b = 70; -- 
+EXPLAIN ANALYZE SELECT c FROM test WHERE a = 100 and b = 200 ; -- 
+
+-- DELETE index
+DROP INDEX test_a_idx, test_b_idx;
+
+CREATE INDEX on test(a, b) -- this index really ifficient when seaching for a, for a and  b. for b postgres does not use the index
+
+
+
+

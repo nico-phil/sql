@@ -25,7 +25,7 @@ type of index
     8.  Bloom Filter Index
 
 
-B-Tree Index
+1. B-Tree Index
 
     Description:    B-Tree indexes are the default and most commonly used index type in PostgreSQL. 
                     They work well for exact matches and range-based queries.

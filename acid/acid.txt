@@ -86,7 +86,7 @@ Database implementation of isolsation
 
 
 Eventual Consistency(in read)
-let say, you have 2 database, the leader one and 2 others. you write in the main database and
+let say, you have 3 database, the leader one and 2 others. you write in the main database and
 replicate into the others. let say we have 2 concurrenct request: the firstOne write x to the main
 and the second read x from the slave db. the second query may have inconsistency because the replicat
 did not happend yet.

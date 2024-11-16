@@ -1,0 +1,66 @@
+Agenda
+    What is Partitioning?
+    Horizontal Partitioning vs Vertical Partitioning
+    Partitioning Types
+    Partitioning vs Sharding
+    Demo
+    Pros & Cons
+    Summary
+
+
+ What is Partitioning?
+
+    Partitioning in databases is a technique used to divide a large table or dataset into smaller, 
+    more manageable parts, known as partitions. Each partition represents a subset of the data, usually 
+    based on a specific attribute like date, region, or ID range. Partitioning improves query performance, 
+    manageability, and scalability by allowing the database to operate on only the relevant subset of data 
+    rather than the entire table.
+
+
+
+Vertical vs Horizontal Partitioning
+    - Horizontal Partitioning splits rows into partitions
+        - Range or list
+    - Vertical partitioning splits columns partitions
+        - Large column (blob) that you can store in a slow
+        access drive in its own tablespace
+
+
+Partitioning Types
+    By Range
+        Dates, ids (e.g. by logdate or customerid from to)
+    By List
+        Discrete values (e.g. states CA, AL, etc.) or zip codes
+    By Hash
+        Hash functions (consistent hashing)
+ 
+
+
+Horizontal Partitioning vs Sharding
+
+    HP splits big table into multiple tables in the same database, client is agnostic
+
+    Sharding splits big table into multiple tables across multiple database servers
+    HP table name changes (or schema)
+    
+    Sharding everything is the same but server changes
+
+
+
+Pros
+    Improves query performance when accessing a single partition
+    
+    Sequential scan vs scattered index scan
+    
+    Easy bulk loading (attach partition)
+    
+    Archive old data that are barely accessed into cheap
+    storage
+
+
+Cons
+    Updates that move rows from a partition to another (slow or fail sometimes)
+    
+    Inefficient queries could accidently scan all partitions resulting in slower performance
+    
+    Schema changes can be challenging (DBMS could manage it though)

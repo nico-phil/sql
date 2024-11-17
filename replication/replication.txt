@@ -151,3 +151,14 @@ Challenges of Replication
     
     Complexity:
         Managing and monitoring a replicated setup is more complex than a single database system
+
+
+
+Example: Replication in PostgreSQL
+    PostgreSQL supports various replication methods, including:
+
+    Streaming Replication: Uses write-ahead logs (WAL) to replicate data from the primary to replicas.
+    
+    Logical Replication: Allows replicating specific tables or subsets of data using subscriptions.
+    
+    sCascading Replication: Replicas act as a source for other replicas, forming a hierarchy.

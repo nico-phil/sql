@@ -161,4 +161,4 @@ Example: Replication in PostgreSQL
     
     Logical Replication: Allows replicating specific tables or subsets of data using subscriptions.
     
-    sCascading Replication: Replicas act as a source for other replicas, forming a hierarchy.
+    Cascading Replication: Replicas act as a source for other replicas, forming a hierarchy.

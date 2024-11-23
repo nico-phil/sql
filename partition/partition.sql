@@ -1,6 +1,6 @@
 Create table grades_org(id serial not null, g integer not null);
 
-INSERT INTO grades_org(g) SELECT floor(random() * 100) FROM GENERATE_SERIES(0, 10000000);
+INSERT INTO grades_org(g) SELECT floor(random() * 100) FROM GENERATE_SERIES(0, 10 000 000);
 
 CREATE INDEX grades_org_idx on grades_org(g);
 
